@@ -1,42 +1,48 @@
-## Title
-Начало:
-Завершение:
+## 📌 Patres Job Task
+- Начало:
+- Завершение:
 
+### ⚙️ Технологии
+- FastAPI
+- JWT
+- Pytest
+- SQLAlchemy
+- Alembic
+- PostgreSQL
+- Docker
+- Nginx
 
+### Локальная настройка
 
-
-
-
-### Local
-create local dotabase via psql - main
-create local test dtabase via psql - test
-
-(example)
-
+### Создание основной базы данных (`main`)
+```bash
 sudo -i -u postgres
 psql
-
+```
+В консоли PostgreSQL выполните:
+```sql
 CREATE DATABASE main_postgresql_database;
 CREATE USER myuser WITH ENCRYPTED PASSWORD 'mypassword';
 GRANT ALL PRIVILEGES ON DATABASE main_postgresql_database TO myuser;
-
-
-
+```
+### Создание тестовой базы данных (`test`)
+В консоли PostgreSQL выполните:
+```sql
 CREATE DATABASE test_postgresql_database;
 CREATE USER myuser WITH ENCRYPTED PASSWORD 'mypassword';
 GRANT ALL PRIVILEGES ON DATABASE test_postgresql_database TO myuser;
+``` 
 
-
-
-fill .env by .env.example
-
+### Конфигурация окружения
+Заполните файл .env, используя шаблон из .env.example:
+```ini
 POSTGRES_DB_HOST=localhost
 POSTGRES_DB_PORT=5432
 POSTGRES_DB_USER=myuser
 POSTGRES_DB_PASS=mypassword
 POSTGRES_DB_NAME=main_postgresql_database
 
-JWT_SECRET_KEY=    # openssl rand -hex 32 
+JWT_SECRET_KEY=    # сгенерируйте с помощью: openssl rand -hex 32
 JWT_ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 
@@ -45,36 +51,31 @@ TEST_POSTGRES_DB_PORT=5432
 TEST_POSTGRES_DB_USER=myuser
 TEST_POSTGRES_DB_PASS=mypassword
 TEST_POSTGRES_DB_NAME=test_postgresql_database
+```
 
+### Установка, миграции и запуск проекта
+```bash
 python3 -m venv .venv
+source .venv/bin/activate       # для Linux/macOS
+
 pip3 install -r requirements.txt
 
 alembic upgrade head
 
 uvicorn app.main:app --reload
+```
 
-go localhost:8000/docs
-librariant - register - email/password
-Auth button fill username - your email, password
-
+### Тестирование и использование
+- Откройте в браузере: http://localhost:8000/docs
+- Зарегистрируйте пользователя с ролью librarian (email и пароль).
+- В Swagger UI используйте кнопку Authorize для авторизации введите email (в поле username) и пароль.
+- Запустите тесты с покрытием:
+```bash
 pytest
-
---------------------------------------------------
-psql -U evalshine -d mydatabase23123;
-psql -U evalshine -d test213dawd;
-
-alembic revision --autogenerate -m "init"
-alembic upgrade head
-
-ruff check --fix
-ruff format
-
-pytest
----------------------------------------------------
+```
 
 
-
-### Docker
+### Настройка в Docker
 
 fill .env by .env.example
 
