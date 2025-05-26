@@ -389,9 +389,9 @@ librarian_id = Annotated[int, Depends(get_current_user_id)]
 
   - Предназначена для OAuth2 "Resource Owner Password Credentials" потока (в вашем случае — логин по email/паролю, получение токена и использование его для доступа к API).
 
-## Предложения
+### Предложения
 
-### Дополнительная фича: Улучшенная безопасность аутентификации с использованием Access/Refresh токенов, Token Rotation и Blacklisting
+### Улучшенная безопасность аутентификации с использованием Access/Refresh токенов, Token Rotation и Blacklisting
 
 #### Идея фичи  
 Для повышения безопасности защищённых эндпоинтов API я бы внедрил механизм разделения токенов на короткоживущие access токены и долгоживущие refresh токены с поддержкой token rotation и blacklisting.
