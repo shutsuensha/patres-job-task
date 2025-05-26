@@ -126,7 +126,7 @@ docker run --rm --network library-network fastapi-image-library-api alembic upgr
 - Зарегистрируйтесь как librarian (email и пароль).
 - В Swagger UI используйте кнопку Authorize для авторизации введите email (в поле username) и пароль.
 
-### Запуск тестов внутри контейнера
+### Запуск тестов с покрытием внутри контейнера
 ```bash
 docker run --rm --network library-network fastapi-image-library-api pytest
 ```
@@ -259,8 +259,6 @@ my_project/
 
 - **Обновление объекта для возврата**  
   После завершения транзакции вызывается `session.refresh(borrowed)`, чтобы вернуть актуальные данные о новой записи.
-
----
 
 ### Сложности и их решения
 
