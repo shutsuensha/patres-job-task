@@ -1,0 +1,34 @@
+services:
+  postgresql:
+    image: postgres:16
+    container_name: ${POSTGRES_DB_HOST}
+    environment:
+      POSTGRES_USER: ${POSTGRES_DB_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_DB_PASS}
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
+    networks:
+      - library-network
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+
+  test_postgresql:
+    image: postgres:16
+    container_name: ${TEST_POSTGRES_DB_HOST}
+    environment:
+      POSTGRES_USER: ${TEST_POSTGRES_DB_USER}
+      POSTGRES_PASSWORD: ${TEST_POSTGRES_DB_PASS}
+      POSTGRES_DB: ${TEST_POSTGRES_DB_NAME}
+    networks:
+      - library-network
+    volumes:
+      - test-postgresql-data:/var/lib/postgresql/data
+
+
+networks:
+  library-network:
+    external: true
+
+
+volumes:
+  postgresql-data:
+  test-postgresql-data:
