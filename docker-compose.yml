@@ -1,0 +1,20 @@
+services:
+  fastapi-app:
+    image: fastapi-image-library-api
+    container_name: fastapi_container
+    networks:
+      - library-network
+  
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_container
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - library-network
+
+networks:
+  library-network:
+    external: true
